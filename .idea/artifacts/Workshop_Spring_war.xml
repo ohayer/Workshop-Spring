@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Workshop-Spring:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Workshop-Spring</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Workshop-Spring-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Workshop-Spring:war exploded" />
+    </root>
+  </artifact>
+</component>
