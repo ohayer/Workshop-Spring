@@ -64,27 +64,25 @@ public class MockBookService {
 
     @DeleteMapping("list/{id}")
     public String removeBook(@PathVariable Long id) {
-        list.removeIf(book -> book.getId().equals(id - 1));
-        return "redirect:/books/list";
+        list.remove(id);
+
+        return list.toString();
     }
 
     @PutMapping("list/{id}")
     @ResponseBody
-    public String updateBook(@PathVariable Long i,
-                             @RequestParam String isbn,
-                             @RequestParam String title,
-                             @RequestParam String author,
-                             @RequestParam String publisher,
-                             @RequestParam String type) {
-        String id = String.valueOf(i);
-            list.get(Integer.parseInt(id)).setAuthor(author);
-            list.get(Integer.parseInt(id)).setTitle(title);
-            list.get(Integer.parseInt(id)).setIsbn(isbn);
-            list.get(Integer.parseInt(id)).setType(type);
-            list.get(Integer.parseInt(id)).setPublisher(publisher);
-
+    public String updateBook(@PathVariable Long id, @RequestBody Book book) {
+        if (list.get(Math.toIntExact(id)) != null) {
+            list.add(book);
+        }
         return list.toString();
-
     }
 
+    @PostMapping("list")
+    @ResponseBody
+    public String addBook2(@RequestBody Book book) {
+        book.setId(nextId++);
+        list.add(book);
+        return list.toString();
+    }
 }
